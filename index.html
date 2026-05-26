@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Protocol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#050505] text-white overflow-hidden">
+    <div id="app" class="relative min-h-screen w-full flex items-center justify-center selection:bg-[#ff4d6d]/30 overflow-hidden">
+        <div class="scanline"></div>
+        <div id="stars-container" class="absolute inset-0 pointer-events-none"></div>
+
+        <audio id="bg-music" loop>
+            <source src="you.mp3" type="audio/mpeg">
+        </audio>
+
+        <button id="music-toggle" class="fixed top-8 right-8 z-50 p-2 text-white/20 hover:text-white/80 transition-all duration-300 hidden">
+            <i id="music-icon" data-lucide="volume-2" class="w-5 h-5"></i>
+        </button>
+
+        <div id="console-stage" class="w-full max-w-2xl p-8 font-mono text-sm md:text-base text-white/80 z-10">
+            <div class="space-y-4">
+                <div class="flex flex-col gap-2">
+                    <div class="flex gap-2 text-[#ff8fb1]/60">
+                        <span>[scanner]</span>
+                        <span id="typewriter"></span>
+                    </div>
+                    <div id="extra-lines" class="space-y-1"></div>
+                </div>
+                
+                <div class="flex gap-2 h-6">
+                    <span>[status]</span>
+                    <span id="status-ready" class="text-green-400 hidden">READY</span>
+                </div>
+
+                <div id="decrypt-container" class="pt-8 flex flex-col items-start gap-6 opacity-0 transition-opacity duration-500 hidden">
+                    <p class="text-white/40 italic">
+                        &gt; One encrypted package found for you.
+                    </p>
+                    
+                    <button
+                        id="decrypt-button"
+                        class="group flex items-center gap-3 px-6 py-3 border border-[#ff4d6d]/30 bg-[#ff4d6d]/5 hover:bg-[#ff4d6d]/10 text-[#ff8fb1] transition-all duration-300 pointer-events-auto"
+                    >
+                        <i data-lucide="lock" class="w-4 h-4 group-hover:rotate-12 transition-transform"></i>
+                        <span class="font-mono tracking-widest uppercase text-xs">Decrypt Message</span>
+                        <span class="terminal-cursor"></span>
+                    </button>
+                    
+                    <p class="text-[10px] text-white/20 animate-pulse">
+                        (or just click anywhere)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="reveal-stage" class="fixed inset-0 w-full h-screen flex items-center justify-center overflow-hidden hidden opacity-0 transition-opacity duration-1000">
+            <canvas id="heartCanvas" class="fixed inset-0 w-full h-full pointer-events-none"></canvas>
+            
+            <div id="decrypted-content" class="z-20 text-center scale-90 opacity-0 transition-all duration-1000 delay-[2000ms]">
+                <h2 id="name-display" class="text-[#ff4d6d] font-mono text-2xl tracking-[0.4em] uppercase glow-text mb-2 cursor-pointer hover:scale-110 transition-transform active:scale-95 select-none">
+                    LABUDA
+                </h2>
+                <div class="w-16 h-px bg-[#ff4d6d]/30 mx-auto mb-8"></div>
+                
+                <button
+                    id="re-encrypt-button"
+                    class="text-white/20 hover:text-white/60 transition-colors uppercase text-[10px] tracking-widest font-mono"
+                >
+                    Re-encrypt
+                </button>
+            </div>
+
+            <div class="absolute top-8 left-8 text-[10px] font-mono text-white/10 uppercase tracking-widest space-y-1">
+                <div>ln: 420</div>
+                <div>id: 0xDEADBEEF</div>
+                <div>type: organic_emotion</div>
+            </div>
+            
+            <div class="absolute bottom-8 right-8 text-[10px] font-mono text-white/10 uppercase tracking-widest">
+                heart_reveal // success
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
